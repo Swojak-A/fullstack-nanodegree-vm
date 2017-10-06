@@ -7,10 +7,9 @@ html_output_open = '<html><body>'
 html_output_close = '</body></html>'
 
 
-
 @app.route('/')
-@app.route('/restaurants')
-def main_page():
+@app.route('/restaurants/<int:picked_restaurant>/')
+def main_page(picked_restaurant):
 
     restaurants = get_all_rest()
     menu_items = get_all_menuitems()
@@ -18,12 +17,12 @@ def main_page():
     # print(menu_items)
 
     html_output = ''
-    html_output += '<h4>%s</h4>' % restaurants[restaurants.keys()[1]]
+    html_output += '<h4>%s</h4>' % restaurants[restaurants.keys()[picked_restaurant]]
 
 
     for item in menu_items:
 
-        if menu_items[item]["restaurant_id"] == restaurants.keys()[1]:
+        if menu_items[item]["restaurant_id"] == restaurants.keys()[picked_restaurant]:
             html_paragraph = '<p>'
             html_paragraph += '%s</br>%s</br>%s' % (menu_items[item]["name"],menu_items[item]["price"],menu_items[item]["description"])
             html_paragraph += "</p>"
