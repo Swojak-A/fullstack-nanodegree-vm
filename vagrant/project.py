@@ -11,8 +11,9 @@ html_output_close = '</body></html>'
 
 
 @app.route('/')
-@app.route('/restaurants/<int:picked_restaurant>/')
-def main_page(picked_restaurant):
+@app.route('/restaurants/<int:restaurant_id>/')
+@app.route('/restaurants/<int:restaurant_id>/menu/')
+def main_page(restaurant_id):
 
     restaurants = get_all_rest()
     menu_items = get_all_menuitems()
@@ -20,12 +21,12 @@ def main_page(picked_restaurant):
     # print(menu_items)
 
     html_output = ''
-    html_output += '<h4>%s</h4>' % restaurants[restaurants.keys()[picked_restaurant]]
+    html_output += '<h4>%s</h4>' % restaurants[restaurants.keys()[restaurant_id]]
 
 
     for item in menu_items:
 
-        if menu_items[item]["restaurant_id"] == restaurants.keys()[picked_restaurant]:
+        if menu_items[item]["restaurant_id"] == restaurants.keys()[restaurant_id]:
             html_paragraph = '<p>'
             html_paragraph += '%s</br>%s</br>%s' % (menu_items[item]["name"],menu_items[item]["price"],menu_items[item]["description"])
             html_paragraph += "</p>"
@@ -35,6 +36,30 @@ def main_page(picked_restaurant):
 
     return html_output
 
+
+
+@app.route('/restaurants/<int:restaurant_id>/menu/new/')
+def newMenuItem(restaurant_id):
+
+    return "page to create a new menu item. Task 1 complete!"
+
+
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/')
+def editMenuItem(restaurant_id, menu_id):
+
+    return "page to edit a menu item. Task 2 complete!"
+
+
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/')
+def deleteMenuItem(restaurant_id, menu_id):
+
+    return "page to delete a menu item. Task 3 complete!"
+
+
+
+# ### #####  @_@  ##### ### #
 
 if __name__ == "__main__":
     app.debug = True
