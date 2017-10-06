@@ -31,7 +31,7 @@ def newMenuItem(restaurant_id):
         return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
     else:
         return render_template('newmenuitem.html', restaurant_id=restaurant_id)
-
+    ## need to update template to show restaurant name
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/')
