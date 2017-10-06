@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, request, redirect
 
-from _CRUD import get_all_rest, get_all_menuitems, new_restaurant, delete_restaurant, update_name
+from _CRUD import get_all_rest, get_all_menuitems, new_restaurant, delete_restaurant, update_name, new_menu_item
 
 
 app = Flask(__name__)
@@ -13,35 +13,24 @@ html_output_close = '</body></html>'
 # @app.route('/')
 @app.route('/restaurants/<int:restaurant_id>/')
 @app.route('/restaurants/<int:restaurant_id>/menu/')
-def main_page(restaurant_id):
+def restaurantMenu(restaurant_id):
 
     restaurants = get_all_rest()
     menu_items = get_all_menuitems()
 
     # print(menu_items)
 
-    # html_output = ''
-    # html_output += '<h4>%s</h4>' % restaurants[restaurants.keys()[restaurant_id]]
-    #
-    #
-    # for item in menu_items:
-    #
-    #     if menu_items[item]["restaurant_id"] == restaurants.keys()[restaurant_id]:
-    #         html_paragraph = '<p>'
-    #         html_paragraph += '%s</br>%s</br>%s' % (menu_items[item]["name"],menu_items[item]["price"],menu_items[item]["description"])
-    #         html_paragraph += "</p>"
-    #         html_output += html_paragraph
-    #
-    # html_output = "".join([html_output_open, html_output, html_output_close])
-
     return render_template("menu.html", restaurants=restaurants, restaurant_id=restaurant_id, menu_items=menu_items)
 
 
 
-@app.route('/restaurants/<int:restaurant_id>/menu/new/')
+@app.route('/restaurants/<int:restaurant_id>/menu/new/', methods=['GET', 'POST'])
 def newMenuItem(restaurant_id):
-
-    return "page to create a new menu item. Task 1 complete!"
+    if request.method == 'POST':
+        new_menu_item(name=request.form['name'], restaurant_id=restaurant_id)
+        return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
+    else:
+        return render_template('newmenuitem.html', restaurant_id=restaurant_id)
 
 
 
