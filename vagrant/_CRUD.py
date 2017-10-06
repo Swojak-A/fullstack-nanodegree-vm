@@ -25,11 +25,20 @@ def get_all_menuitems():
         output[item.id]["description"] = item.description
     return output
 
+
+
 def new_restaurant(name):
     userRestaurant = Restaurant(name=name)
     session.add(userRestaurant)
     session.commit()
     print("Added new restaurant, full list: ", [(e.id, e.name) for e in session.query(Restaurant).all()])
+
+def new_menu_item(name, restaurant_id):
+    userMenuItem = MenuItem(name=name, restaurant_id=restaurant_id, description="", price="", course="")
+    session.add(userMenuItem)
+    session.commit()
+    print("Added new menu_item, full list: ", [(e.id, e.name, e.restaurant_id) for e in session.query(MenuItem).all()])
+
 
 def delete_restaurant(id):
     to_be_deleted = session.query(Restaurant).filter_by(id=id).one()
@@ -37,8 +46,20 @@ def delete_restaurant(id):
     session.commit()
     print("Record id = %s was succesfully deleted" % str(id))
 
+def delete_menu_item(id):
+    to_be_deleted = session.query(MenuItem).filter_by(id=id).one()
+    session.delete(to_be_deleted)
+    session.commit()
+    print("Record id = %s was succesfully deleted" % str(id))
+
+
 def update_name(id, new_name):
     to_be_renamed = session.query(Restaurant).filter_by(id=id).one()
     to_be_renamed.name = new_name
     session.commit()
     print("Record id = %s was succesfully renamed to %s" % (str(id), new_name))
+
+if __name__ == "__main__":
+    # delete_menu_item(50)
+    # delete_menu_item(51)
+    pass
