@@ -1,7 +1,10 @@
 from flask import Flask
-app = Flask(__name__)
 
 from _CRUD import get_all_rest, get_all_menuitems, new_restaurant, delete_restaurant, update_name
+
+
+app = Flask(__name__)
+
 
 html_output_open = '<html><body>'
 html_output_close = '</body></html>'
