@@ -3,13 +3,13 @@ app = Flask(__name__)
 
 from _CRUD import get_all_rest, get_all_menuitems, new_restaurant, delete_restaurant, update_name
 
-html_output_in = '<html><body>'
-html_output_out = '</body></html>'
+html_output_open = '<html><body>'
+html_output_close = '</body></html>'
 
 
 
 @app.route('/')
-@app.route('/hello')
+@app.route('/restaurants')
 def main_page():
 
     restaurants = get_all_rest()
@@ -19,11 +19,17 @@ def main_page():
 
     html_output = ''
     html_output += '<h4>%s</h4>' % restaurants[restaurants.keys()[1]]
-    for item in menu_items:
-        if menu_items[item]["restaurant_id"] == restaurants.keys()[1]:
-            html_output += '<p>%s</p>' % menu_items[item]["name"]
 
-    html_output = "".join([html_output_in, html_output, html_output_out])
+
+    for item in menu_items:
+
+        if menu_items[item]["restaurant_id"] == restaurants.keys()[1]:
+            html_paragraph = '<p>'
+            html_paragraph += '%s</br>%s</br>%s' % (menu_items[item]["name"],menu_items[item]["price"],menu_items[item]["description"])
+            html_paragraph += "</p>"
+            html_output += html_paragraph
+
+    html_output = "".join([html_output_open, html_output, html_output_close])
 
     return html_output
 
