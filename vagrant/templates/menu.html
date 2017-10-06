@@ -10,9 +10,12 @@
     {% if menu_items[i]["restaurant_id"] == restaurants.keys()[restaurant_id] %}
     <div>
         <p>
-            {{menu_items[i]["name"]}}</br>
-            {{menu_items[i]["price"]}}</br>
-            {{menu_items[i]["description"]}}
+            {{menu_items[i]["name"]}}<br/>
+            {{menu_items[i]["price"]}}<br/>
+            {{menu_items[i]["description"]}}<br/>
+            <a href='{{url_for("editMenuItem", restaurant_id=menu_items[i]["restaurant_id"], menu_id=i)}}'>Edit</a>
+            <a href='{{url_for("deleteMenuItem", restaurant_id=menu_items[i]["restaurant_id"], menu_id=i)}}'>Delete</a><br/>
+
         </p>
     </div>
     {% endif %}
