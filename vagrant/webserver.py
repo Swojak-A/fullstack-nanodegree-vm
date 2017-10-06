@@ -4,6 +4,9 @@ import cgi
 from _CRUD import get_all_rest, new_restaurant, delete_restaurant, update_name
 
 output_open = "<html><body>"
+output_nav_back = """
+                <p>To get back to main page click <a href="/restaurants">here</a></p>
+                """
 output_close = "</body></html>"
 
 def update_temp_data():
@@ -70,11 +73,8 @@ class webserverHandler(BaseHTTPRequestHandler):
                     <input name="new_resturant" type="text" >
                     <input type="submit" value="Submit"> </form>
                 """
-                output += """
-                <p>To get back to main page click <a href="/restaurants">here</a></p>
-                """
 
-                output = (output_open + output + output_close)
+                output = (output_open + output + output_nav_back + output_close)
 
                 self.wfile.write(output)
                 # print(output)
@@ -96,11 +96,8 @@ class webserverHandler(BaseHTTPRequestHandler):
                         <input name="new_name" type="text" >
                         <input type="submit" value="Submit"> </form>
                     """
-                    output += """
-                    <p>To get back to main page click <a href="/restaurants">here</a></p>
-                    """
 
-                    output = (output_open + output + output_close)
+                    output = (output_open + output + output_nav_back + output_close)
 
                     self.wfile.write(output)
                     # print(output)
@@ -122,11 +119,8 @@ class webserverHandler(BaseHTTPRequestHandler):
                         <input name="delete_confirmation" type="text" >
                         <input type="submit" value="Submit"> </form>
                     """
-                    output += """
-                    <p>To get back to main page click <a href="/restaurants">here</a></p>
-                    """
 
-                    output = (output_open + output + output_close)
+                    output = (output_open + output + output_nav_back + output_close)
 
                     self.wfile.write(output)
                     # print(output)
@@ -163,11 +157,8 @@ class webserverHandler(BaseHTTPRequestHandler):
                 output = ""
                 output += "<h2>Thank You, for your input</h2>"
                 output += "<p>We added <b>%s</b> to our database</p>" % new_restaurant_name[0]
-                output += """
-                <p>To get back to main page click <a href="/restaurants">here</a></p>
-                """
 
-                output = (output_open + output + output_close)
+                output = (output_open + output + output_nav_back + output_close)
 
                 self.wfile.write(output)
 
@@ -181,11 +172,8 @@ class webserverHandler(BaseHTTPRequestHandler):
                     output = ""
                     output += "<h2>Thank You, for your input</h2>"
                     output += "<p>We renamed <b>%s</b> to <b>%s</b> for you</p> " % (restaurants[e], new_name[0])
-                    output += """
-                    <p>To get back to main page click <a href="/restaurants">here</a></p>
-                    """
 
-                    output = (output_open + output + output_close)
+                    output = (output_open + output + output_nav_back + output_close)
 
                     self.wfile.write(output)
 
@@ -210,11 +198,8 @@ class webserverHandler(BaseHTTPRequestHandler):
                         output += "<h2>We were unable to delete the record</h2>"
                         output += "<p>to try again click <a href='/%s'>here</a></p>" % (restaurant_urls[e] + "/delete")
                         print(restaurant_urls[e])
-                        output += """
-                            <p>To get back to main page click <a href="/restaurants">here</a></p>
-                            """
 
-                    output = (output_open + output + output_close)
+                    output = (output_open + output + output_nav_back + output_close)
 
                     self.wfile.write(output)
 
