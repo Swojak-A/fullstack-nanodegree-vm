@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 from _CRUD import get_all_rest, get_all_menuitems, new_restaurant, delete_restaurant, update_name
 
@@ -10,7 +10,7 @@ html_output_open = '<html><body>'
 html_output_close = '</body></html>'
 
 
-@app.route('/')
+# @app.route('/')
 @app.route('/restaurants/<int:restaurant_id>/')
 @app.route('/restaurants/<int:restaurant_id>/menu/')
 def main_page(restaurant_id):
@@ -20,21 +20,21 @@ def main_page(restaurant_id):
 
     # print(menu_items)
 
-    html_output = ''
-    html_output += '<h4>%s</h4>' % restaurants[restaurants.keys()[restaurant_id]]
+    # html_output = ''
+    # html_output += '<h4>%s</h4>' % restaurants[restaurants.keys()[restaurant_id]]
+    #
+    #
+    # for item in menu_items:
+    #
+    #     if menu_items[item]["restaurant_id"] == restaurants.keys()[restaurant_id]:
+    #         html_paragraph = '<p>'
+    #         html_paragraph += '%s</br>%s</br>%s' % (menu_items[item]["name"],menu_items[item]["price"],menu_items[item]["description"])
+    #         html_paragraph += "</p>"
+    #         html_output += html_paragraph
+    #
+    # html_output = "".join([html_output_open, html_output, html_output_close])
 
-
-    for item in menu_items:
-
-        if menu_items[item]["restaurant_id"] == restaurants.keys()[restaurant_id]:
-            html_paragraph = '<p>'
-            html_paragraph += '%s</br>%s</br>%s' % (menu_items[item]["name"],menu_items[item]["price"],menu_items[item]["description"])
-            html_paragraph += "</p>"
-            html_output += html_paragraph
-
-    html_output = "".join([html_output_open, html_output, html_output_close])
-
-    return html_output
+    return render_template("menu.html", restaurants=restaurants, restaurant_id=restaurant_id, menu_items=menu_items)
 
 
 
