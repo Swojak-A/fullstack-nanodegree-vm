@@ -7,6 +7,9 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind = engine)
 session = DBSession()
 
+
+### READ - FETCHING DATA FROM DB ###
+
 def get_all_rest():
     output = {}
     # print([(e.id, e.name) for e in session.query(Restaurant).all()])
@@ -26,6 +29,7 @@ def get_all_menuitems():
     return output
 
 
+### CREATING DATA ###
 
 def new_restaurant(name):
     userRestaurant = Restaurant(name=name)
@@ -33,12 +37,14 @@ def new_restaurant(name):
     session.commit()
     print("Added new restaurant, full list: ", [(e.id, e.name) for e in session.query(Restaurant).all()])
 
-def new_menu_item(name, restaurant_id):
-    userMenuItem = MenuItem(name=name, restaurant_id=restaurant_id, description="", price="", course="")
+def new_menu_item(name, restaurant_id, description="", price=""):
+    userMenuItem = MenuItem(name=name, restaurant_id=restaurant_id, description=description, price=price, course="")
     session.add(userMenuItem)
     session.commit()
     print("Added new menu_item, full list: ", [(e.id, e.name, e.restaurant_id) for e in session.query(MenuItem).all()])
 
+
+### DELETING DATA ###
 
 def delete_restaurant(id):
     to_be_deleted = session.query(Restaurant).filter_by(id=id).one()
@@ -52,6 +58,8 @@ def delete_menu_item(id):
     session.commit()
     print("Record id = %s was succesfully deleted" % str(id))
 
+
+### UPDATING DATA ###
 
 def update_name(id, new_name):
     to_be_renamed = session.query(Restaurant).filter_by(id=id).one()

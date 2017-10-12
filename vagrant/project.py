@@ -28,7 +28,7 @@ def restaurantMenu(restaurant_id):
 @app.route('/restaurants/<int:restaurant_id>/menu/new/', methods=['GET', 'POST'])
 def newMenuItem(restaurant_id):
     if request.method == 'POST':
-        new_menu_item(name=request.form['name'], restaurant_id=restaurant_id)
+        new_menu_item(name=request.form['name'], restaurant_id=restaurant_id, description=request.form['description'], price=request.form['price'])
         return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
     else:
         return render_template('newmenuitem.html', restaurant_id=restaurant_id)
