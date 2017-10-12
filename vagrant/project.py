@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 
-from _CRUD import get_all_rest, get_all_menuitems, new_restaurant, delete_restaurant, update_name, new_menu_item
+from _CRUD import get_all_rest, get_all_menuitems, new_restaurant, delete_restaurant, update_restaurant, new_menu_item, update_menu_item
 
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ def restaurantMenu(restaurant_id):
     restaurants = get_all_rest()
     menu_items = get_all_menuitems()
 
-    print(restaurants)
+    # print(restaurants)
     # print(menu_items)
 
     return render_template("menu.html", restaurants=restaurants, restaurant_id=restaurant_id, menu_items=menu_items)
@@ -35,10 +35,16 @@ def newMenuItem(restaurant_id):
     ## need to update template to show restaurant name
 
 
-@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/')
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/', methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
 
-    return "page to edit a menu item. Task 2 complete!"
+    menu_items = get_all_menuitems()
+
+    if request.method == 'POST':
+        update_menu_item(id=menu_id, new_name=request.form['new_name'] )
+        return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
+    else:
+        return render_template('editmenuitem.html', menu_items=menu_items, restaurant_id=restaurant_id, menu_id=menu_id)
 
 
 
