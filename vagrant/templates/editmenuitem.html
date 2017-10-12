@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 
-<meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
-</head>
-<body>
-<h1> Edit Menu Item: {{ menu_items[menu_id]["name"] }}</h1>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 
-<form action="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=menu_id )}}" method = 'POST'>
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
+    </head>
+    <body>
+        <h1> Edit Menu Item: {{ menu_items[menu_id]["name"] }}</h1>
 
-<p>Edit Name:</p>
+        <form action="{{url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=menu_id )}}" method = 'POST'>
 
-<input type='text' size='30' placeholder='{{menu_items[menu_id]["name"]}}' name='new_name'>
+            <p>Edit Name:</p>
 
-<p>Edit Description:</p>
+            <input type='text' size='30' placeholder='{{menu_items[menu_id]["name"]}}' name='new_name'>
 
-<input type='text' size='30' placeholder='{{menu_items[menu_id]["description"]}}' name='new_description'>
+            <p>Edit Description:</p>
 
-<p>Edit Price:</p>
+            <input type='text' size='30' placeholder='{{menu_items[menu_id]["description"]}}' name='new_description'>
 
-<input type='text' size='30' placeholder='{{menu_items[menu_id]["price"]}}' name='new_price'>
+            <p>Edit Price:</p>
 
-<br />
+            <input type='text' size='30' placeholder='{{menu_items[menu_id]["price"]}}' name='new_price'>
 
-<input type='submit' value='Edit'>
+            <br />
 
-<a href="{{url_for('restaurantMenu', restaurant_id=restaurant_id)}}">Cancel</a>
+            <input type='submit' value='Edit'>
 
-</form>
+            <a href="{{url_for('restaurantMenu', restaurant_id=restaurant_id)}}">Cancel</a>
 
-</body>
+        </form>
+
+    </body>
 </html>

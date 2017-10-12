@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{{restaurants[restaurant_id]}}</title>
-<meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
-</head>
-<body>
-    <h1>{{restaurants[restaurant_id]}}</h1>
+    <head>
+        <title>{{restaurants[restaurant_id]}}</title>
 
-    <!--MESSAGE FLASHING -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 
-    <ul>
-    {% for message in messages %}
-      <li><strong>{{message}}</strong></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
+    </head>
+    <body>
+        <h1>{{restaurants[restaurant_id]}}</h1>
 
-    {% for i in menu_items %}
-    {% if menu_items[i]["restaurant_id"] == restaurant_id %}
-    <div>
-        <p>
-            {{menu_items[i]["name"]}}<br/>
-            {{menu_items[i]["price"]}}<br/>
-            {{menu_items[i]["description"]}}<br/>
-            <a href='{{url_for("editMenuItem", restaurant_id=menu_items[i]["restaurant_id"], menu_id=i)}}'>Edit</a>
-            <a href='{{url_for("deleteMenuItem", restaurant_id=menu_items[i]["restaurant_id"], menu_id=i)}}'>Delete</a><br/>
+        <!--MESSAGE FLASHING -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
 
-        </p>
-    </div>
-    {% endif %}
-    {% endfor %}
+        <ul>
+        {% for message in messages %}
+          <li><strong>{{message}}</strong></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <!-- MAIN CONTENT -->
+
+        {% for i in menu_items %}
+        {% if menu_items[i]["restaurant_id"] == restaurant_id %}
+
+        <div>
+            <p>
+                {{menu_items[i]["name"]}}<br/>
+                {{menu_items[i]["price"]}}<br/>
+                {{menu_items[i]["description"]}}<br/>
+                <a href='{{url_for("editMenuItem", restaurant_id=menu_items[i]["restaurant_id"], menu_id=i)}}'>Edit</a>
+                <a href='{{url_for("deleteMenuItem", restaurant_id=menu_items[i]["restaurant_id"], menu_id=i)}}'>Delete</a><br/>
+
+            </p>
+        </div>
+        {% endif %}
+        {% endfor %}
 
 
-</body></html>
+    </body>
+</html>
