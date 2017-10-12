@@ -18,6 +18,7 @@ def restaurantMenu(restaurant_id):
     restaurants = get_all_rest()
     menu_items = get_all_menuitems()
 
+    print(restaurants)
     # print(menu_items)
 
     return render_template("menu.html", restaurants=restaurants, restaurant_id=restaurant_id, menu_items=menu_items)
