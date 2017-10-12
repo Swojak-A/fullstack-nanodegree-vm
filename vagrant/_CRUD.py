@@ -28,7 +28,7 @@ def get_all_menuitems():
         output[item.id]["description"] = item.description
     return output
 
-def get_all_menuitems_by_restaurant(restaurant_id):
+def get_all_menu_items_by_restaurant(restaurant_id):
     output = {}
     # print([(e.id, e.name) for e in session.query(Restaurant).all()])
     for item in session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all():

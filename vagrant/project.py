@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 
-from _CRUD import get_all_rest, get_all_menuitems, get_all_menuitems_by_restaurant, new_restaurant, new_menu_item, delete_restaurant, delete_menu_item, update_restaurant, update_menu_item
+from _CRUD import get_all_rest, get_all_menuitems, get_all_menu_items_by_restaurant, new_restaurant, new_menu_item, delete_restaurant, delete_menu_item, update_restaurant, update_menu_item
 
 
 app = Flask(__name__)
@@ -38,7 +38,7 @@ def newMenuItem(restaurant_id):
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit/', methods=['GET', 'POST'])
 def editMenuItem(restaurant_id, menu_id):
 
-    menu_items = get_all_menuitems_by_restaurant(restaurant_id=restaurant_id)
+    menu_items = get_all_menu_items_by_restaurant(restaurant_id=restaurant_id)
 
     if request.method == 'POST':
         update_menu_item(id=menu_id, new_name=request.form['new_name'], new_description=request.form['new_description'] , new_price=request.form['new_price'])
@@ -50,8 +50,8 @@ def editMenuItem(restaurant_id, menu_id):
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete/', methods=['GET', 'POST'])
 def deleteMenuItem(restaurant_id, menu_id):
-
-    menu_items = get_all_menuitems_by_restaurant(restaurant_id=restaurant_id)
+    
+    menu_items = get_all_menu_items_by_restaurant(restaurant_id=restaurant_id)
 
     if request.method == 'POST':
         delete_menu_item(id=menu_id)
