@@ -17,6 +17,9 @@ def get_all_rest():
         output[rest.id] = rest.name
     return output
 
+def get_restaurant(id):
+    return session.query(Restaurant).filter_by(id=id).all()
+
 def get_all_menuitems():
     output = {}
     # print([(e.id, e.name) for e in session.query(Restaurant).all()])

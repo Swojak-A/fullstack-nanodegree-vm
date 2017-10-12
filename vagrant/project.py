@@ -1,6 +1,6 @@
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, render_template, url_for, request, redirect, flash, jsonify
 
-from _CRUD import get_all_rest, get_all_menuitems, get_all_menu_items_by_restaurant, new_restaurant, new_menu_item, delete_restaurant, delete_menu_item, update_restaurant, update_menu_item
+from _CRUD import get_all_rest, get_restaurant, get_all_menuitems, get_all_menu_items_by_restaurant, new_restaurant, new_menu_item, delete_restaurant, delete_menu_item, update_restaurant, update_menu_item
 
 
 app = Flask(__name__)
@@ -22,6 +22,10 @@ def restaurantMenu(restaurant_id):
     # print(menu_items)
 
     return render_template("menu.html", restaurants=restaurants, restaurant_id=restaurant_id, menu_items=menu_items)
+
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON')
+def restaurantMenuJSON(restaurant_id):
+    pass
 
 
 
