@@ -28,6 +28,17 @@ def get_all_menuitems():
         output[item.id]["description"] = item.description
     return output
 
+def get_all_menuitems_by_restaurant(restaurant_id):
+    output = {}
+    # print([(e.id, e.name) for e in session.query(Restaurant).all()])
+    for item in session.query(MenuItem).filter_by(restaurant_id=restaurant_id).all():
+        output[item.id] = {}
+        output[item.id]["name"] = item.name
+        output[item.id]["price"] = item.price
+        output[item.id]["restaurant_id"] = item.restaurant_id
+        output[item.id]["description"] = item.description
+    return output
+
 ### CREATING DATA ###
 
 def new_restaurant(name):
