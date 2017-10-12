@@ -1,7 +1,7 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import cgi
 
-from _CRUD import get_all_rest, new_restaurant, delete_restaurant, update_name
+from _CRUD import get_all_rest, new_restaurant, delete_restaurant, update_restaurant
 
 output_open = "<html><body>"
 output_nav_back = """
@@ -117,7 +117,7 @@ class webserverHandler(BaseHTTPRequestHandler):
                         <form method='POST' enctype='multipart/form-data'>
                         <h2>If you really want to delete it from database please retype "delete"?</h2>
                         <input name="delete_confirmation" type="text" >
-                        <input type="submit" value="Submit"> </form>
+                        <input type="submit" value="Delete"> </form>
                     """
 
                     output = (output_open + output + output_nav_back + output_close)
@@ -167,7 +167,7 @@ class webserverHandler(BaseHTTPRequestHandler):
             for e in restaurant_urls.keys():
                 if self.path.endswith(restaurant_urls[e] + "/edit"):
                     # print(new_name[0])
-                    update_name(e, new_name[0])
+                    update_restaurant(e, new_name[0])
 
                     output = ""
                     output += "<h2>Thank You, for your input</h2>"

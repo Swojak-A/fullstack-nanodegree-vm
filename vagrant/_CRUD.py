@@ -61,11 +61,18 @@ def delete_menu_item(id):
 
 ### UPDATING DATA ###
 
-def update_name(id, new_name):
+def update_restaurant(id, new_name):
     to_be_renamed = session.query(Restaurant).filter_by(id=id).one()
     to_be_renamed.name = new_name
     session.commit()
     print("Record id = %s was succesfully renamed to %s" % (str(id), new_name))
+
+def update_menu_item(id, new_name):
+    to_be_renamed = session.query(MenuItem).filter_by(id=id).one()
+    to_be_renamed.name = new_name
+    session.commit()
+    print("Record id = %s was succesfully renamed to %s" % (str(id), new_name))
+
 
 if __name__ == "__main__":
     # delete_menu_item(50)
