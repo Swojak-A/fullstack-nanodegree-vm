@@ -13,7 +13,19 @@
 
 <input type='text' size='30' placeholder='{{menu_items[menu_id]["name"]}}' name='new_name'>
 
+<p>Edit Description:</p>
+
+<input type='text' size='30' placeholder='{{menu_items[menu_id]["description"]}}' name='new_description'>
+
+<p>Edit Price:</p>
+
+<input type='text' size='30' placeholder='{{menu_items[menu_id]["price"]}}' name='new_price'>
+
+<br />
+
 <input type='submit' value='Edit'>
+
+<a href="{{url_for('restaurantMenu', restaurant_id=restaurant_id)}}">Cancel</a>
 
 </form>
 

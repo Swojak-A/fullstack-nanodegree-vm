@@ -41,7 +41,7 @@ def editMenuItem(restaurant_id, menu_id):
     menu_items = get_all_menuitems()
 
     if request.method == 'POST':
-        update_menu_item(id=menu_id, new_name=request.form['new_name'] )
+        update_menu_item(id=menu_id, new_name=request.form['new_name'], new_description=request.form['new_description'] , new_price=request.form['new_price'])
         return redirect(url_for("restaurantMenu", restaurant_id=restaurant_id))
     else:
         return render_template('editmenuitem.html', menu_items=menu_items, restaurant_id=restaurant_id, menu_id=menu_id)

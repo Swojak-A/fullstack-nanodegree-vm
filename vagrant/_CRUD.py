@@ -28,7 +28,6 @@ def get_all_menuitems():
         output[item.id]["description"] = item.description
     return output
 
-
 ### CREATING DATA ###
 
 def new_restaurant(name):
@@ -67,9 +66,11 @@ def update_restaurant(id, new_name):
     session.commit()
     print("Record id = %s was succesfully renamed to %s" % (str(id), new_name))
 
-def update_menu_item(id, new_name):
-    to_be_renamed = session.query(MenuItem).filter_by(id=id).one()
-    to_be_renamed.name = new_name
+def update_menu_item(id, new_name, new_description, new_price):
+    to_be_changed = session.query(MenuItem).filter_by(id=id).one()
+    to_be_changed.name = new_name
+    to_be_changed.description = new_description
+    to_be_changed.price = new_price
     session.commit()
     print("Record id = %s was succesfully renamed to %s" % (str(id), new_name))
 
