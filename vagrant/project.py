@@ -11,23 +11,24 @@ app = Flask(__name__)
 @app.route('/restaurants/<int:restaurant_id>/menu/')
 def restaurantMenu(restaurant_id):
 
-    restaurants = get_all_rest()
-    menu_items = get_all_menuitems()
+    # restaurants = get_all_rest()
+    # menu_items = get_all_menuitems()
 
-    restaurant = get_restaurant(id=restaurant_id)
-    print(restaurant)
-
-    # print(restaurants)
-    # print(menu_items)
-
-    return render_template("menu.html", restaurants=restaurants, restaurant_id=restaurant_id, menu_items=menu_items)
-
-@app.route('/restaurants/<int:restaurant_id>/menu/JSON')
-def restaurantMenuJSON(restaurant_id):
     restaurant = get_restaurant(id=restaurant_id)
     menu_items = get_all_menu_items_by_restaurant(restaurant_id=restaurant_id)
 
-    return jsonify(MenuItems = [menu_items[i] for i in menu_items])
+    print(restaurant)
+    print([i["name"] for i in menu_items.values()])
+
+    return render_template("menu.html", restaurant=restaurant, restaurant_id=restaurant_id, menu_items=menu_items)
+
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON')
+def restaurantMenuJSON(restaurant_id):
+
+    restaurant = get_restaurant(id=restaurant_id)
+    menu_items = get_all_menu_items_by_restaurant(restaurant_id=restaurant_id)
+
+    return jsonify(ManuItems = [menu_items[i] for i in menu_items])
 
 
 
