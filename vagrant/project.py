@@ -6,10 +6,6 @@ from _CRUD import get_all_rest, get_restaurant, get_all_menuitems, get_all_menu_
 app = Flask(__name__)
 
 
-html_output_open = '<html><body>'
-html_output_close = '</body></html>'
-
-
 # @app.route('/')
 @app.route('/restaurants/<int:restaurant_id>/')
 @app.route('/restaurants/<int:restaurant_id>/menu/')
@@ -18,6 +14,9 @@ def restaurantMenu(restaurant_id):
     restaurants = get_all_rest()
     menu_items = get_all_menuitems()
 
+    restaurant = get_restaurant(id=restaurant_id)
+    print(restaurant)
+
     # print(restaurants)
     # print(menu_items)
 
@@ -25,7 +24,10 @@ def restaurantMenu(restaurant_id):
 
 @app.route('/restaurants/<int:restaurant_id>/menu/JSON')
 def restaurantMenuJSON(restaurant_id):
-    pass
+    restaurant = get_restaurant(id=restaurant_id)
+    menu_items = get_all_menu_items_by_restaurant(restaurant_id=restaurant_id)
+
+    return jsonify(MenuItems = [menu_items[i] for i in menu_items])
 
 
 

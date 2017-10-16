@@ -18,7 +18,8 @@ def get_all_rest():
     return output
 
 def get_restaurant(id):
-    return session.query(Restaurant).filter_by(id=id).all()
+    restaurant = session.query(Restaurant).filter_by(id=id).first()
+    return restaurant.name
 
 def get_all_menuitems():
     output = {}
