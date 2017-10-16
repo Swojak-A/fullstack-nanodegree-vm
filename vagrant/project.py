@@ -28,7 +28,7 @@ def restaurantMenuJSON(restaurant_id):
     restaurant = get_restaurant(id=restaurant_id)
     menu_items = get_all_menu_items_by_restaurant(restaurant_id=restaurant_id)
 
-    return jsonify(MenuItems = [[menu_items[i] for i in menu_items]])
+    return jsonify(RestaurantName = restaurant, MenuItems = [[menu_items[i] for i in menu_items]])
 
 
 
