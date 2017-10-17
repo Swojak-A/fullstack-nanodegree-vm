@@ -6,7 +6,17 @@ from _CRUD import get_all_rest, get_restaurant, get_all_menuitems, get_all_menu_
 app = Flask(__name__)
 
 
-# @app.route('/')
+@app.route('/')
+@app.route('/restaurants/')
+def index():
+
+    restaurants = get_all_rest()
+
+    return render_template("index.html", restaurants=restaurants)
+
+
+
+
 @app.route('/restaurants/<int:restaurant_id>/')
 @app.route('/restaurants/<int:restaurant_id>/menu/')
 def restaurantMenu(restaurant_id):
